@@ -1,4 +1,5 @@
 require('../db/db-index');// this line runs db-index.js to initialize database
+require('../models/model-index'); // runs our models. This is important because it loads indexes into RAM
 
 /* === External Modules === */
 const express = require('express');
