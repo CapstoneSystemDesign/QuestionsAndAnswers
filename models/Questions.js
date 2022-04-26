@@ -18,7 +18,7 @@ const questionsSchema = new mongoose.Schema({
   date_written: Number,
   asker_name: String,
   asker_email: String,
-  helpful: Number,
+  question_helpfullness: Number,
 });
 
 questionsSchema.index({ product_id: 1, question_id: 1, reported: 1 });

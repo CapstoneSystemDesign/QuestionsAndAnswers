@@ -3,9 +3,12 @@ const { Answers } = require('../models/model-index');
 module.exports = async function (answer_id, res) {
   // console.log('typeof',  product_id);
   console.log('Marking Answer As helpful');
+  const filter = {id: answer_id};
 
   try {
-    let markAnswerStatus = await Answers.findOneAndUpdate({id: answer_id}, {helpfullness: this.helpfullness+1});
+    let doc = Answers.findOne(filter);
+    let markAnswerStatus = await Answers.findOneAndUpdate(filter, {helpfullness: this.helpfullness+1});
+    doc.save();
     console.log(markAnswerStatus);
     res.send(markAnswerStatus);
    } catch(err) {
