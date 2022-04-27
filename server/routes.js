@@ -37,7 +37,7 @@ router.get("/qa/questions/:question_id/answers", (req, res) => {
 //AddQuestion: adds a question given product id (not complete)
 router.post("/qa/questions/", (req, res) => {
   const {product_id, body, name, email} = req.body;
-  AddQuestion(product_id, body, name, email);
+  AddQuestion(product_id, body, name, email, res);
 });
 
 //AddAnswer: adds an answer (not complete)

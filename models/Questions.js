@@ -3,21 +3,37 @@ const mongoose = require('mongoose');
 const questionsSchema = new mongoose.Schema({
   product_id: {
     type: Number,
-    index: true
+    index: true,
+    required: true,
   },
   question_id: {
     type: Number,
     index: true,
+    required: true,
   },
   reported: {
     type: Boolean,
     index: true,
+    default: true,
   },
-  body: String,
-  date_written: Number,
-  asker_name: String,
-  asker_email: String,
-  question_helpfullness: Number,
+  body: {
+    type: String,
+    required: true,
+    max: 500,
+  },
+  question_date: Number,
+  asker_name: {
+    type: String,
+    default: 'anonymous',
+  },
+  asker_email: {
+    type: String,
+    default: 'anonymous',
+  },
+  question_helpfulness: {
+    type: Number,
+    default: 0,
+  }
 },{toJSON: {virtuals: true}});
 
 questionsSchema.index({ product_id: 1, question_id: 1, reported: 1 }, {name: 'product_id_1_question_id_1_reported_1'});

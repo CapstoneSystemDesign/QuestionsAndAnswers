@@ -1,28 +1,20 @@
 const { Questions } = require('../models/model-index');
 
-module.exports = async function (question_id, res) {
-  console.log('Adding Question');
+module.exports = async function (product_id, body, name, email, res) {
+  const filter = { product_id: product_id };
 
-  let filter = {question_id, question_id};
-
-  // Questions.findOne(filter, function(err, userDoc) {
-  //   if(err) {
-  //     console.log('something went wrong in MarkQuestionHelpful: ', err.message);
-  //     res.send(err);
-  //   } else if(!userDoc) {
-  //     console.log('No questions with matching ID found');
-  //     res.send('invalid question_id');
-  //   } else {
-  //     userDoc.question_helpfullness ++;
-  //     console.log('now saving');
-  //     userDoc.save(function (err) {
-  //       if (err) {
-  //         console.log('something went wrong whild saving question helpfullness');
-  //         res.send(500);
-  //       } else {
-  //         res.send();
-  //       }
-  //     })
-  //   }
-  // })
+  try {
+    const { question_id: lastQuestionID } = await Questions.findOne({}).sort('-question_id').select('question_id -_id');
+     await Questions.create([{
+      product_id: product_id,
+      question_id: lastQuestionID + 1,
+      body: body,
+      asker_email: email,
+      question_date: 1595884714409
+    }])
+    res.send();
+  } catch (err) {
+    console.log('something went down in AddQuestion.js: ', err.message);
+    res.send(err.message);
+  }
 }
