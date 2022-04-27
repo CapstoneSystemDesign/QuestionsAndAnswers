@@ -13,7 +13,7 @@ const morgan = require('morgan');
 const app = express();
 
 /* === Middleware === */
-app.use(express.json()); //accept json as body data
+app.use(express.json({limit: 500})); //accept json as body data.  limits size to 500bytes
 app.use(express.urlencoded({extended: true}));
 
 

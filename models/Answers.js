@@ -5,6 +5,7 @@ const answersSchema = new mongoose.Schema({
   question_id: {
     type: Number,
     index: true,
+    required: [true, 'please provide question_id'],
   },
   id: {
     type: Number,
@@ -18,15 +19,9 @@ const answersSchema = new mongoose.Schema({
   date_written: Number,
   asker_name: String,
   asker_email: String,
-  helpful: Number,
+  helpfulness: Number,
   photos: Array,
 });
 answersSchema.index({question_id: 1, id: 1, reported: 1});
-// console.log(answersSchema.virtual);
-// answersSchema.virtual('questions', {
-//   ref: 'questions',
-//   localField: 'question_id',
-//   foreignField: 'question_id',
-// })
 
 module.exports = mongoose.model('answers_with_photos1', answersSchema);

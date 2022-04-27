@@ -39,11 +39,4 @@ module.exports = async function (question_id, res) {
   //   console.log('something went wrong in markQuestionStatus: ', err);
   //   res.send(err.message)
   // }
-
-  //this needs refactoring because it's copy and paste
-  // Answers.find({question_id: 6879306, id: 3518963, reported: false}).explain()
-  // .then((result)=>{
-  //   console.log(result);
-  //   res.send(result);
-  // })
 }
