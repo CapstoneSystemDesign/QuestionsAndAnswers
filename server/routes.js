@@ -16,6 +16,7 @@ const {
 //this is the home route
 router.get("/", (req, res) => {
   console.log('home route entered. This goes nowhere for QA');
+  res.send('O.o what are you doing here?')
 });
 
 //ListQuestions: gets questions&answers given product id
@@ -34,26 +35,22 @@ router.get("/qa/questions/:question_id/answers", (req, res) => {
   ListAnswers(question_id, page, count, res);
 });
 
-//AddQuestion: adds a question given product id (not complete)
+//AddQuestion: adds a question given product id
 router.post("/qa/questions/", (req, res) => {
   const {product_id, body, name, email} = req.body;
   AddQuestion(product_id, body, name, email, res);
 });
 
-//AddAnswer: adds an answer (not complete)
+//AddAnswer: adds an answer given question id
 router.post("/qa/questions/:question_id/answers", (req, res) => {
   const question_id = req.params.question_id;
   const {body, name, email, photos} = req.body;
-  console.log('oaisjfowijf')
-  AddAnswer(question_id, body, name, email, photos);
+  AddAnswer(question_id, body, name, email, photos, res);
 });
 
 //MarkQuestionHelpful: marks question as helpful
 router.put("/qa/questions/:question_id/helpful", (req, res) => {
-  console.log('Mark Question helpful router entered');
   const question_id = req.params.question_id;
-  console.log('QUESTIF ID', question_id);
-
   MarkQuestionHelpful(question_id, res);
 });
 

@@ -14,11 +14,10 @@ module.exports = async function (question_id, res) {
       console.log('No questions with matching ID found');
       res.send('invalid question_id');
     } else {
-      userDoc.question_helpfullness ++;
-      console.log('now saving');
+      userDoc.question_helpfulness ++;
       userDoc.save(function (err) {
         if (err) {
-          console.log('something went wrong whild saving question helpfullness');
+          console.log('something went wrong whild saving question helpfullness: ', err.message);
           res.send(500);
         } else {
           res.send();
@@ -26,17 +25,4 @@ module.exports = async function (question_id, res) {
       })
     }
   })
-
-  // try {
-  //   let doc = await Questions.findOne(filter);
-  //   await Questions.updateOne(filter, {question_helpfullness: 5})
-  //   // let markQuestionStatus = await Questions.findOneAndUpdate({'question_id': question_id}, {'question_helpfullness': 3});
-  //   await doc.save();
-  //   // console.log(markQuestionStatus);
-  //   // res.send(markQuestionStatus);
-  //   res.send();
-  //  } catch(err) {
-  //   console.log('something went wrong in markQuestionStatus: ', err);
-  //   res.send(err.message)
-  // }
 }

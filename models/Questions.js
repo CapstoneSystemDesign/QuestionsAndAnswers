@@ -16,9 +16,9 @@ const questionsSchema = new mongoose.Schema({
     index: true,
     default: true,
   },
-  body: {
+  question_body: {
     type: String,
-    required: true,
+    required: false,
     max: 500,
   },
   question_date: Number,
