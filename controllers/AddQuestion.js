@@ -1,4 +1,4 @@
-const { Questions } = require('../models/model-index');
+const { Questions } = require('../models');
 
 module.exports = async function (product_id, body, name, email, res) {
 

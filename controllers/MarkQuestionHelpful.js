@@ -1,4 +1,4 @@
-const { Questions } = require('../models/model-index');
+const { Questions } = require('../models');
 
 module.exports = async function (question_id, res) {
   let filter = {question_id, question_id};

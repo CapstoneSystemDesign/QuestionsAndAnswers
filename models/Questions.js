@@ -57,7 +57,6 @@ questionsSchema.virtual('answers', {
 //verification stuff
 //ensures indexes are created
 const Questions = mongoose.model('questions', questionsSchema);
-console.log('questionsSchema', questionsSchema);
 Questions.ensureIndexes((err)=>{
   if(err) {
     console.log('ensureIndexes', err);

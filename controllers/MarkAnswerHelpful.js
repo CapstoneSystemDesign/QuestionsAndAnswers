@@ -1,4 +1,4 @@
-const { Answers } = require('../models/model-index');
+const { Answers } = require('../models');
 
 module.exports = async function (answer_id, res) {
   console.log('Marking Answer As helpful ', answer_id );

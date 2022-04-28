@@ -1,5 +1,4 @@
 var router = require('express').Router();
-const controller = require('../controllers/controller-index'); // remember to check these names in the index
 const {
   ListQuestions,
   ListAnswers,
@@ -9,14 +8,14 @@ const {
   ReportQuestion,
   MarkAnswerHelpful,
   ReportAnswer,
-} = require('../controllers/controller-index.js');
+} = require('../controllers');
 
 
 /* === Routes === */
 //this is the home route
 router.get("/", (req, res) => {
   console.log('home route entered. This goes nowhere for QA');
-  res.send('O.o what are you doing here?')
+  res.send('O.o what are you doing here?');
 });
 
 //ListQuestions: gets questions&answers given product id

@@ -1,4 +1,4 @@
-const { Answers } = require('../models/model-index');
+const { Answers } = require('../models');
 
 module.exports = async function (question_id, page, count, res) {
 
