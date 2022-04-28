@@ -1,9 +1,6 @@
 const { Questions } = require('../models/model-index');
 
 module.exports = async function (question_id, res) {
-  // console.log('typeof',  product_id);
-  console.log('Marking Question As helpfullll!');
-
   let filter = {question_id, question_id};
 
   Questions.findOne(filter, function(err, userDoc) {

@@ -6,6 +6,10 @@ const questionsSchema = new mongoose.Schema({
     index: true,
     required: true,
   },
+  id: {
+    type: Number,
+    index: true,
+  },
   question_id: {
     type: Number,
     index: true,
@@ -33,7 +37,7 @@ const questionsSchema = new mongoose.Schema({
   question_helpfulness: {
     type: Number,
     default: 0,
-  }
+  },
 },{toJSON: {virtuals: true}});
 
 questionsSchema.index({ product_id: 1, question_id: 1, reported: 1 }, {name: 'product_id_1_question_id_1_reported_1'});
@@ -42,12 +46,18 @@ questionsSchema.virtual('answers', {
   ref: 'answers_with_photos1',
   localField: 'question_id',
   foreignField: 'question_id',
+}).get((answers) => {
+  const returnedResponse = {};
+  answers.forEach((answer) => {
+    returnedResponse[answer.id] = answer;
+  });
+  return returnedResponse;
 })
-
 
 //verification stuff
 //ensures indexes are created
 const Questions = mongoose.model('questions', questionsSchema);
+console.log('questionsSchema', questionsSchema);
 Questions.ensureIndexes((err)=>{
   if(err) {
     console.log('ensureIndexes', err);
