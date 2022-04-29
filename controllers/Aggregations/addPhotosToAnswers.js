@@ -30,11 +30,6 @@ MongoClient.connect(
     client.close();
   });
 
-// const mongoose = require('mongoose');
-// const { AnswersList } = require('../../models/model-index');
-
-// aggregate.lookup({ from: 'AnswersList.answers_photos', localField: 'answer_id', foreignField: 'answer_id', as: 'photos' });
-
 db.answers_photos.createIndex({ answer_id: 1 })
 db.answers.createIndex({ id: 1 })
 db.answers.aggregate([{ $lookup: { from: 'answers_photos', localField: 'id', foreignField: 'answer_id', as: 'photos' } }, { $out: 'answers_with_photos1' }])

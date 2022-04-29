@@ -1,25 +1,27 @@
-const { Answers } = require('../models/model-index');
+const { Answers } = require('../models');
 
 module.exports = async function (answer_id, res) {
-  // console.log('typeof',  product_id);
-  console.log('Marking Answer As helpful');
-  const filter = {id: answer_id};
+  console.log('Marking Answer As helpful ', answer_id );
+  let filter = {id: answer_id};
 
-  try {
-    let doc = Answers.findOne(filter);
-    let markAnswerStatus = await Answers.findOneAndUpdate(filter, {helpfullness: this.helpfullness+1});
-    doc.save();
-    console.log(markAnswerStatus);
-    res.send(markAnswerStatus);
-   } catch(err) {
-    console.log('something went wrong in markAnswerStatus: ', err);
-    res.send(err.message)
-  }
-
-  //this needs refactoring because it's copy and paste
-  // Answers.find({question_id: 6879306, id: 3518963, reported: false}).explain()
-  // .then((result)=>{
-  //   console.log(result);
-  //   res.send(result);
-  // })
+  Answers.findOne(filter, function(err, userDoc) {
+    if(err) {
+      console.log('something went wrong in MarkAnswerHelpful: ', err.message);
+      res.send(err);
+    } else if(!userDoc) {
+      console.log('No answers with matching ID found');
+      res.send('invalid answer_id');
+    } else {
+      userDoc.helpfulness ++;
+      console.log('now saving');
+      userDoc.save(function (err) {
+        if (err) {
+          console.log('something went wrong whild saving answer helpfullness');
+          res.send(500);
+        } else {
+          res.send();
+        }
+      })
+    }
+  })
 }

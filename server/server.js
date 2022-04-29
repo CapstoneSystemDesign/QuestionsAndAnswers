@@ -1,11 +1,9 @@
-require('../db/db-index');// this line runs db-index.js to initialize database
-require('../models/model-index'); // runs our models. This is important because it loads indexes into RAM
+require('../db');// this line runs db-index.js to initialize database
+require('../models'); // runs our models. This is important because it loads indexes into RAM
 
 /* === External Modules === */
 const express = require('express');
 const morgan = require('morgan');
-
-
 
 /* === Internal Modules === */
 
@@ -13,7 +11,7 @@ const morgan = require('morgan');
 const app = express();
 
 /* === Middleware === */
-app.use(express.json()); //accept json as body data
+app.use(express.json({limit: 500})); //accept json as body data.  limits size to 500bytes
 app.use(express.urlencoded({extended: true}));
 
 

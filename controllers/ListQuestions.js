@@ -1,21 +1,12 @@
-const { Questions, Answers } = require('../models/model-index');
+const { Questions, Answers } = require('../models');
 
 module.exports = async function (product_id, page, count, res) {
-  // console.log('typeof',  product_id);
-  console.log('Searching Questions');
-
   try {
-    let questions = await Questions.find({product_id: product_id, reported: false}).select(['-_id','-product_id']);
-    console.log(questions);
-    res.send(questions);
+    let questions = await Questions.find({product_id: product_id, reported: false})
+    .select('-_id -reported -product_id').populate('answers', '-_id -reported');
+    res.send({product_id: product_id.toString(), results: questions});
    } catch(err) {
     console.log('something went wrong in ListQuestions: ', err);
     res.send(err.message)
   }
-
-  // Questions.find({question_id: 6879306, id: 3518963, reported: false}).explain()
-  // .then((result)=>{
-  //   console.log(result);
-  //   res.send(result);
-  // })
 }
